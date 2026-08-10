@@ -18,24 +18,38 @@ const unsigned long autoInterval = 500;
 void setup() {
   Serial.begin(9600);
   display.begin();
+  display.setCommonAnode(true); // change the 7S if its anode or cathode
   buttons.begin();
   display.showDigit(value);
 }
 
 void loop() {
-  if (buttons.bt1Pressed()) { if (value < 9) value++; display.showDigit(value); }
-  if (buttons.bt2Pressed()) { if (value > 0) value--; display.showDigit(value); }
+  if (buttons.bt1Pressed()) { 
+    if (value < 9) value++; 
+      display.showDigit(value); 
+      Serial.print("BT1"); 
+      Serial.println(value);
+    }
 
+  if (buttons.bt2Pressed()) { 
+    if (value > 0) value--;
+     display.showDigit(value); 
+     Serial.print("BT2"); 
+      Serial.println(value);
+  }
   if (buttons.bt3Pressed()) {
-    if (autoMode == AUTO_UP) autoRunning = !autoRunning;
-    else { autoMode = AUTO_UP; autoRunning = true; }
-    lastStepMs = millis();
+    if (autoMode != AUTO_UP || !autoRunning) {
+      autoMode = AUTO_UP;
+      autoRunning = true;
+      lastStepMs = millis();  
+  }
   }
 
   if (buttons.bt4Pressed()) {
-    if (autoMode == AUTO_DOWN) autoRunning = !autoRunning;
-    else { autoMode = AUTO_DOWN; autoRunning = true; }
-    lastStepMs = millis();
+    if (autoMode != AUTO_DOWN || !autoRunning) {
+      autoMode = AUTO_DOWN;
+      autoRunning = true;
+      lastStepMs = millis();   
   }
 
   if (buttons.bt5Pressed()) {

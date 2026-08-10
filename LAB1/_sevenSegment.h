@@ -9,10 +9,11 @@ public:
 
   void begin();
   void showDigit(byte d);
+  void setCommonAnode(bool enabled);
 
 private:
   byte _segPins[7];
-
+  bool _commonAnode = false;
   static const byte _digitMap[10][7];
 };
 
