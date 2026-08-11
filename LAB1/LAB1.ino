@@ -18,7 +18,7 @@ const unsigned long autoInterval = 500;
 void setup() {
   Serial.begin(9600);
   display.begin();
-  display.setCommonAnode(true); // change the 7S if its anode or cathode
+  display.setCommonAnode(true); // change the 7S if its anode or cathode hello Jastien
   buttons.begin();
   display.showDigit(value);
 }
@@ -73,5 +73,5 @@ void loop() {
     display.showDigit(value);
   }
 
-  delay(20);
+  delay(25);
 }
